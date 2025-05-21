@@ -67,17 +67,12 @@ export default {
   },
   methods: {
     handleScroll() {
-      switch (this.stage) {
 
-        case 1:
-          if (window.scrollY + window.innerHeight + 10 < this.backdropHeight) return;
+      if (window.scrollY + window.innerHeight + 10 < this.backdropHeight * this.stage) return;
 
-          scroll(0, this.backdropHeight, "smooth");
+      scroll(0, this.backdropHeight * this.stage, "smooth");
 
-          this.stage = 2;
-          break;
-
-      }
+      this.stage++;
 
     }
   }
