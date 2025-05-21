@@ -22,16 +22,21 @@ export default {
   data() {
     return {
       items: [
-        { img: require('../assets/pages/mylove1.jpeg'), text: 'Heyyyyyy' },
-        { img: require('../assets/pages/mylove1.jpeg'), text: 'She always listens' },
-        { img: require('../assets/pages/mylove1.jpeg'), text: 'She makes the best tea' }
+        { text: 'Heyyyyyy' },
+        { text: 'She always listens' },
+        { text: 'She makes the best tea' }
         // Add more items as you like
       ]
     };
   },
   methods: {
     getSrc(idx) {
-      return require('../assets/pages/mylove' + idx + '.jpeg');
+      try {
+        return require('../assets/pages/mylove' + idx + '.jpeg');
+      } catch (err) {
+        console.warn("Image " + idx + " not found");
+        return '';
+      }
     }
   }
 }
