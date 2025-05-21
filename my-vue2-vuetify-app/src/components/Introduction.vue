@@ -1,11 +1,11 @@
 <template>
   <div :class="positionClass">
-    <div :class="title-block" :style="{ marginTop: -backdropHeight * 0.1 + 'px' }">
+    <div :style="{ marginTop: -backdropHeight * 0.1 + 'px' }" :class="titleVisibleClass">
       <h1>101 reasons</h1>
       <h1>I love</h1>
       <h1>Alexa Hatcher</h1>
     </div>
-    <p id="comprehension" :class="visibleClass" :style="{ top: backdropHeight * 0.515 + 'px' }">(The comprehensive list)</p>
+    <p id="comprehension" :class="compVisibleClass" :style="{ top: backdropHeight * 0.515 + 'px' }">(The comprehensive list)</p>
   </div>
 </template>
 
@@ -15,7 +15,8 @@ export default {
   data() {
     return {
       isFixed: true,
-      compVisible: true
+      compVisible: true,
+      titleVisible: true
     };
   },
   props: {
@@ -28,8 +29,11 @@ export default {
     positionClass() {
       return !this.isFixed ? 'fixed-position' : 'absolute-position';
     },
-    visibleClass() {
-      return this.compVisible ? 'visible' : 'invisible';
+    compVisibleClass() {
+      return this.compVisible ? 'visible-comp' : 'invisible';
+    },
+    titleVisibleClass() {
+      return this.titleVisible ? 'visible-title' : 'invisible';
     }
   },
   mounted() {
@@ -42,6 +46,7 @@ export default {
     handleScroll() {
       this.isFixed = window.scrollY < 50;
       this.compVisible = window.scrollY < 15;
+      this.titleVisible = window.scrollY < this.backdropHeight * 0.6;
     }
   }
 }
@@ -89,8 +94,13 @@ p {
   width: 100%;
 }
 
-.visible {
+.visible-comp {
   position: fixed;
+  z-index: 2;
+}
+
+.visible-title {
+  z-index: 2;
 }
 
 .invisible {

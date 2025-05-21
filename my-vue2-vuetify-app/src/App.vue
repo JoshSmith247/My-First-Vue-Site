@@ -10,6 +10,7 @@
         <Introduction :backdropHeight="backdropHeight"></Introduction>
         <!--<v-btn color="primary">Click me</v-btn>-->
       </div>
+      <Page :backdropHeight="backdropHeight"></Page>
     </v-container>
     <ScrollBar></ScrollBar>
   </v-app>
@@ -19,12 +20,14 @@
 import { onMounted, ref } from 'vue';
 import Introduction from './components/Introduction.vue';
 import ScrollBar from './components/ScrollBar.vue';
+import Page from './components/Page.vue';
 
 export default {
   name: 'App',
   components: {
     Introduction,
-    ScrollBar
+    ScrollBar,
+    Page
   },
   data() {
     return {
@@ -36,6 +39,7 @@ export default {
     const backdropHeight = ref(0);
 
     onMounted(() => {
+
       const updateHeight = () => {
         if (backdrop.value) {
           backdropHeight.value = backdrop.value.clientHeight;
@@ -66,7 +70,11 @@ export default {
       switch (this.stage) {
 
         case 1:
-          console.log(1);
+          if (window.scrollY + window.innerHeight + 10 < this.backdropHeight) return;
+
+          scroll(0, this.backdropHeight, "smooth");
+
+          this.stage = 2;
           break;
 
       }
@@ -78,7 +86,17 @@ export default {
 
 <style>
 
+html {
+  scroll-behavior: smooth;
+}
+
 .backdrop {
+  position: absolute;
+  z-index: 0;
+  width: 100%;
+}
+
+.bd2 {
   position: absolute;
   z-index: 0;
   width: 100%;
@@ -95,5 +113,8 @@ export default {
   z-index: 1;
 }
 
+body::-webkit-scrollbar {
+  display: none;
+}
 
 </style>
