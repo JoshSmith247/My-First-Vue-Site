@@ -61,19 +61,25 @@ export default {
   },
   mounted() {
     window.addEventListener('scroll', this.handleScroll);
+    window.addEventListener('click', this.scrollAction);
   },
   beforeUnmount() {
     window.removeEventListener('scroll', this.handleScroll);
+    window.addEventListener('click', this.scrollAction);
   },
   methods: {
     handleScroll() {
 
       if (window.scrollY + window.innerHeight + 10 < this.backdropHeight * this.stage) return;
 
+      this.scrollAction();
+
+    },
+    scrollAction() {
+
       scroll(0, this.backdropHeight * this.stage, "smooth");
-
       this.stage++;
-
+      
     }
   }
 }

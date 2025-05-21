@@ -24,7 +24,10 @@ export default {
       items: [
         { text: 'Heyyyyyy' },
         { text: 'She always listens' },
-        { text: 'She makes the best tea' }
+        { text: 'She looks SO adorable dressed in a suit. Just look at her!!' },
+        { text: 'She is SUCH a little baby <3' },
+        { text: 'She has the most beautiful eyes' },
+        { text: 'There is nobody on earth with prettier hair than my Alexa' }
         // Add more items as you like
       ]
     };
